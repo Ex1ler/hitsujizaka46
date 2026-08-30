@@ -139,7 +139,10 @@
   .stage-card-name{font-size:26px}
 }
 @media(max-width:520px){
-  .stage-card{aspect-ratio:1/1}
+  .stage-card{
+    width:80%;
+    aspect-ratio:3/2;
+  }
   .stage-card-name{font-size:22px}
   .stage-card-songs li{font-size:12px;padding:7px 4px}
   .stage-card-hint{display:none}

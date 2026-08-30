@@ -264,8 +264,9 @@
     padding:18px 14px 22px;
   }
   .setlist-hero{
+    width:80%;
     max-width:none;
-    margin:0 14px 16px;
+    margin:0 auto 16px;
   }
   .setlist-body{
     max-width:none;
@@ -276,5 +277,5 @@
   .track-item::before{left:-12px}
   .track-nm{font-size:15px}
   .track-lk{grid-column:2;justify-content:flex-start;padding:5px 10px;font-size:11px}
-  .setlist-hero-img{height:152px}
+  .setlist-hero-img{height:122px}
 }
