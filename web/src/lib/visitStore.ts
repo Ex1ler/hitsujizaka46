@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis';
 
-export const VISIT_COUNT_KEY = 'hitsuji:stats:site-visits';
+export const VISIT_COUNT_KEY = 'hitsuji:stats:site-visits:v7';
 export const VISIT_SESSION_COOKIE = 'hitsuji.visit.session';
 
 function env(name: string): string | undefined {
