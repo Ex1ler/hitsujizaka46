@@ -1,0 +1,102 @@
+/* =========================================================
+   社交链接（绿白主题 · 仅文字版）
+   - 删掉 PNG logo（用户第 22 轮反馈"图也太糊了"）
+   - 只保留平台名 + 用户 ID 双行文字
+   - card 化设计 + hover 渐变高光 + ↗ 箭头滑入
+   ========================================================= */
+.social-links{
+  list-style:none;margin:0;padding:0;
+  display:flex;align-items:stretch;justify-content:flex-start;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.social-link-item{display:inline-flex}
+
+.social-link{
+  position:relative;
+  display:inline-flex;align-items:center;gap:14px;
+  padding:14px 22px 14px 22px;
+  min-width:220px;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:14px;
+  color:var(--ink-2);
+  font:inherit;
+  text-decoration:none;
+  transition:
+    color .25s ease,
+    background .35s ease,
+    border-color .25s ease,
+    transform .3s cubic-bezier(.2,.7,.2,1),
+    box-shadow .35s ease;
+  cursor:pointer;
+  box-shadow:0 1px 0 rgba(31,40,24,.04);
+  overflow:hidden;
+}
+.social-link::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(95deg, var(--green-bg-2) 0%, rgba(240,247,235,0) 75%);
+  opacity:0;
+  border-radius:14px;
+  transition:opacity .35s ease;
+  pointer-events:none;
+}
+.social-link:hover{
+  color:var(--ink);
+  border-color:var(--green);
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(63,122,50,.18);
+}
+.social-link:hover::before{opacity:1}
+.social-link:focus-visible{
+  outline:0;
+  box-shadow:0 0 0 2px var(--green-bg);
+}
+
+/* 双行文字 */
+.social-tx{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  line-height:1.2;
+  position:relative;
+  z-index:1;
+  min-width:0;
+}
+.social-platform{
+  font-size:11px;letter-spacing:.32em;
+  color:var(--muted);text-transform:uppercase;
+  font-weight:600;
+  transition:color .25s ease;
+}
+.social-link:hover .social-platform{color:var(--green)}
+.social-id{
+  font-family:var(--font-serif);font-size:17px;font-weight:600;
+  letter-spacing:.04em;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:180px;
+  transition:letter-spacing .25s ease;
+}
+.social-link:hover .social-id{letter-spacing:.06em}
+
+/* ↗ 箭头（hover 滑入） */
+.social-arrow{
+  margin-left:auto;
+  font-size:15px;color:var(--muted-2);
+  opacity:0;
+  transform:translate(-4px,-4px);
+  transition:opacity .25s ease, transform .25s ease, color .25s ease;
+  position:relative;
+  z-index:1;
+  font-weight:500;
+}
+.social-link:hover .social-arrow{
+  opacity:1;
+  transform:translate(0,0);
+  color:var(--green);
+}
+
+@media(max-width:720px){
+  .social-links{gap:10px}
+  .social-link{min-width:0;width:100%;padding:12px 18px}
+  .social-id{font-size:15px;max-width:150px}
+}

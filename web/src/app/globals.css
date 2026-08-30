@@ -1,0 +1,496 @@
+/* =========================================================
+   咩咩坂46 — green/white palette · wabi-sabi composition
+   配色延续之前那版（绿白），版式与节奏靠 wabi-sabi：
+     · 中宋体 + 大量留白
+     · 0.5-1px 发丝暖灰边
+     · 非对称章节标记（壹贰叁）+ 印泥 + 笔触分隔
+     · 网格化、卡片化、悬浮态克制
+   ========================================================= */
+
+:root{
+  --paper:        #fcfdf9;      /* 主纸面（极浅米白） */
+  --paper-2:      #f5f7f0;      /* 次纸面 */
+  --white:        #ffffff;      /* 主标题区纯白 */
+  --ink:          #1a1a1a;      /* 主字 */
+  --ink-2:        #2c2c2c;      /* 次字 */
+  --muted:        #596257;      /* 静音字 */
+  --muted-2:      #7b8578;
+  --green:        #3f7a32;      /* 主绿（深） */
+  --green-2:      #2e6025;      /* 更深绿（重点字） */
+  --green-3:      #63b853;      /* 品牌亮绿 */
+  --green-4:      #8acf78;      /* 飘色 */
+  --green-bg:     #e8f1de;      /* 浅绿背景 */
+  --green-bg-2:   #f0f7eb;      /* 极浅绿 */
+  --line:         #dbe2d2;      /* 发丝线 暖灰绿 */
+  --line-2:       #c8d1bf;
+  --line-green:   rgba(63,122,50,.24);
+  --shadow-1:     0 1px 0 rgba(31,40,24,.04);
+  --shadow-2:     0 6px 22px rgba(31,40,24,.06);
+  --shadow-3:     0 14px 38px rgba(31,40,24,.10);
+  --floating-bg:  rgba(255,255,255,.88);
+  --floating-brd: rgba(63,122,50,.18);
+  --floating-shadow: 0 10px 28px rgba(31,40,24,.10);
+  --focus-ring:   0 0 0 3px rgba(138,207,120,.38);
+  --tap-min:      44px;
+  --maxw:         1180px;
+  --maxw-tight:   900px;
+  /* 半透明玻璃背景（顶栏 / 滚动提示等 fixed 元素） */
+  --glass:        rgba(252,253,249,.86);
+  --glass-strong: rgba(255,255,255,.94);
+
+  --font-sans:    "Noto Sans SC","PingFang SC","Microsoft YaHei","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Segoe UI","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji","Apple Color Emoji",sans-serif;
+  --font-serif:   "Noto Serif SC","Source Han Serif SC","STSong","SimSun","Songti SC","STFangsong","FangSong","Segoe UI Symbol","Segoe UI Emoji","Noto Color Emoji","Apple Color Emoji",serif;
+  --font-mono:    "SF Mono","JetBrains Mono",Consolas,"Segoe UI Symbol","Noto Color Emoji",monospace;
+}
+
+*{box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+}
+.snap-section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  box-sizing:border-box;
+  padding:0;
+}
+.snap-section.is-auto{
+  min-height:100vh;
+  height:auto;
+  justify-content:flex-start;
+  padding-top:96px;
+  padding-bottom:64px;
+}
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  letter-spacing:.02em;
+  text-rendering:optimizeLegibility;
+  /* 换思源字体（Noto Serif/Sans SC）后，渲染清晰，无需 text-shadow 软化 */
+  font-synthesis:none;
+  font-optical-sizing:auto;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:0;padding:0;cursor:pointer;color:inherit}
+button,
+a,
+input,
+[role='button']{
+  -webkit-tap-highlight-color:transparent;
+}
+img{max-width:100%;display:block}
+em{font-style:normal;color:var(--green-2)}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[role='button']:focus-visible,
+summary:focus-visible{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+
+/* ---------- 全局标题 / 章节标记（克制留白） ---------- */
+.sec-head{
+  position:relative;
+  display:block;
+  padding:24px 0 56px;
+  margin-bottom:64px;
+}
+.sec-text{padding-bottom:6px}
+.sec-en{
+  display:block;
+  font-size:11px;
+  letter-spacing:.4em;
+  color:var(--green);
+  margin-bottom:16px;
+  font-weight:600;
+}
+.sec-zh{
+  margin:0;
+  font-family:var(--font-serif);
+  font-weight:600;
+  font-size:42px;
+  line-height:1.1;
+  letter-spacing:.02em;
+  color:var(--ink);
+}
+.sec-sub{
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  letter-spacing:.04em;
+  line-height:1.6;
+}
+
+@media(max-width:720px){
+  .sec-head{padding:16px 0 36px;margin-bottom:48px}
+  .sec-zh{font-size:30px}
+}
+
+@media(max-width:780px){
+  html{
+    scroll-snap-type:y proximity;
+  }
+}
+
+/* ---------- 区域容器 ---------- */
+.regions{padding:0}
+
+/* ---------- 页脚（整页 footer，内容不变，字号/图标放大） ---------- */
+.foot{
+  background:var(--paper-2);
+  border-top:1px solid var(--line);
+  padding:112px 0 72px;
+  margin-top:0;
+  position:relative;
+}
+.foot::before{
+  content:'';position:absolute;left:50%;top:-12px;transform:translateX(-50%);
+  width:160px;height:1px;background:var(--green);
+}
+.foot-inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 32px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:22px;
+}
+.foot-bless{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  margin-bottom:4px;
+}
+.foot-sun{
+  width:56px;height:56px;
+  animation:sun-spin 16s linear infinite;
+}
+@keyframes sun-spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.foot-bless-tx{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:28px;
+  letter-spacing:.08em;
+  color:var(--ink);
+}
+.foot-thanks{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:18px;
+  letter-spacing:.14em;
+  color:var(--green-2);
+}
+.foot-brand{
+  display:flex;justify-content:center;align-items:center;gap:16px;
+  margin:10px 0 18px;
+}
+.foot-mark{
+  width:48px;height:48px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 2px 6px rgba(63,122,50,.18));
+  /* 让 logo 视觉中心与"咩咩坂46"文字 x-height 中心对齐 */
+  align-self:center;
+}
+.foot-name{
+  font-family:var(--font-serif);font-weight:600;
+  font-size:30px;letter-spacing:.12em;color:var(--ink);
+  line-height:1;
+  display:inline-flex;align-items:baseline;
+}
+.foot-en{
+  font-size:16px;letter-spacing:.46em;color:var(--green);
+  text-transform:uppercase;
+  display:inline-flex;align-items:baseline;
+  font-weight:500;
+}
+.foot-en{
+  font-size:13px;letter-spacing:.46em;color:var(--green);
+  text-transform:uppercase;
+}
+.foot-links{
+  display:flex;justify-content:center;align-items:center;
+  gap:16px;
+  margin:28px 0 22px;
+  flex-wrap:wrap;
+}
+.foot-links a{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:120px;
+  padding:10px 22px;
+  border:1px solid var(--line-green);
+  border-radius:999px;
+  background:var(--white);
+  font-size:14px;color:var(--ink-2);
+  letter-spacing:.04em;
+  transition:.2s;
+  box-shadow:var(--shadow-1);
+}
+.foot-links a:hover{
+  color:var(--green-2);
+  border-color:var(--green-3);
+  background:var(--green-bg-2);
+  transform:translateY(-1px);
+}
+.foot-fine{
+  color:var(--muted);
+  text-align:center;
+  max-width:860px;
+  width:min(100%, 860px);
+  margin-top:20px;
+}
+.foot-copy{
+  margin:0 0 20px;
+  font-size:13px;
+  letter-spacing:.16em;
+}
+.foot-note{
+  margin:0;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.72);
+  box-shadow:var(--shadow-1);
+  border-radius:24px;
+  overflow:hidden;
+}
+.foot-note[open]{
+  box-shadow:var(--shadow-2);
+}
+.foot-note-summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:22px 28px;
+  cursor:pointer;
+}
+.foot-note-summary::-webkit-details-marker{
+  display:none;
+}
+.foot-note-title{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:17px;
+  letter-spacing:.18em;
+  color:var(--green-2);
+}
+.foot-note-toggle{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--green);
+}
+.foot-note-toggle::after{
+  content:'';
+  width:8px;
+  height:8px;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(-1px);
+  transition:transform .2s ease;
+}
+.foot-note[open] .foot-note-toggle::after{
+  transform:rotate(-135deg) translateY(-1px);
+}
+.foot-note-panel{
+  padding:0 28px 22px;
+}
+.foot-note-body{
+  max-width:56ch;
+  margin:0 auto;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+.foot-note-body p{
+  margin:0;
+  font-size:13px;
+  letter-spacing:.04em;
+  line-height:1.95;
+}
+.foot-note-body p + p{
+  margin-top:10px;
+}
+.foot-note-thanks{
+  margin:16px auto 0;
+  max-width:56ch;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:13px;
+  letter-spacing:.08em;
+  color:var(--green-2);
+}
+.foot-note-thanks a{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-thickness:1px;
+}
+.foot-note-thanks a:hover{
+  color:var(--green);
+}
+
+/* ---------- 首页社交链接（Masthead 内部底部） ---------- */
+.home-social-wrap{
+  margin-top:96px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  gap:24px;
+  opacity:.94;
+  transform:translateY(10px);
+  transition:opacity .65s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready .home-social-wrap{
+  opacity:1;
+  transform:none;
+}
+.home-social-en{
+  font-size:13px;letter-spacing:.4em;
+  color:var(--green);text-transform:uppercase;font-weight:600;
+}
+.home-social-wrap .social-links{
+  margin-top:0;
+}
+
+@media(max-width:520px){
+  .foot-bless-tx{font-size:23px}
+  .foot-name{font-size:23px}
+  .foot-fine{margin-top:28px}
+  .foot-note{border-radius:20px}
+  .foot-note-summary{padding:18px 18px}
+  .foot-note-panel{padding:0 18px 18px}
+  .foot-note-title{font-size:15px;letter-spacing:.12em}
+  .foot-note-body p,
+  .foot-note-thanks,
+  .foot-copy{font-size:12px;letter-spacing:.06em}
+  .foot-links{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+  }
+  .foot-links a{
+    min-width:0;
+    width:100%;
+    padding:9px 16px;
+    font-size:13px;
+  }
+  .home-social-wrap{margin-top:48px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .home-social-wrap{
+    transition:none !important;
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
+
+/* =========================================================
+   滚动进入动画：由 FxObserver 通过 IntersectionObserver 触发
+   - 每次进入界面都会重新播放（FxObserver 在路由切换时复位）
+   - 通过 CSS 变量让不同元素表现不同（淡入上浮 / 弹入 / 浮现）
+   - 单条动画 < 0.7s，配合错峰延迟整屏不超过 2.4s
+   ========================================================= */
+.reveal,
+[data-fx-section]{
+  opacity:0;
+  --fx-y:26px;          /* 上浮位移 */
+  --fx-scale:.94;       /* 起始缩放 */
+  --fx-blur:5px;        /* 起始模糊（materialize 质感） */
+  --fx-dur:.7s;         /* 单条动画时长 */
+  --fx-ease:cubic-bezier(.2,.7,.2,1);
+  transform:translateY(var(--fx-y)) scale(var(--fx-scale));
+  filter:blur(var(--fx-blur));
+  transition:
+    opacity   var(--fx-dur) var(--fx-ease),
+    transform var(--fx-dur) var(--fx-ease),
+    filter    var(--fx-dur) var(--fx-ease);
+  transition-delay:var(--fx-delay, 0ms);
+  will-change:opacity, transform, filter;
+}
+/* 区块级容器：更温和的整体上浮 */
+[data-fx-section]{
+  --fx-y:14px;
+  --fx-scale:1;
+  --fx-blur:3px;
+}
+/* 卡片：带轻微回弹的「弹入」 */
+.fx-pop{
+  --fx-y:14px;
+  --fx-scale:.82;
+  --fx-blur:3px;
+  --fx-dur:.62s;
+  --fx-ease:cubic-bezier(.18,.9,.28,1.16);
+}
+/* 卡片 / 列表项：自下而上 + 轻微缩放的「浮现」 */
+.fx-rise{
+  --fx-y:32px;
+  --fx-scale:.97;
+  --fx-blur:4px;
+  --fx-dur:.66s;
+}
+/* 标题类：温和上浮 */
+.fx-soft{
+  --fx-y:18px;
+  --fx-scale:1;
+  --fx-blur:2px;
+  --fx-dur:.7s;
+}
+
+.reveal.is-visible,
+[data-fx-section].is-visible{
+  opacity:1;
+  transform:none;
+  filter:blur(0);
+}
+/* 已可见后释放 will-change，避免长列表持续合成 */
+.reveal.is-visible,
+[data-fx-section].is-visible{
+  will-change:auto;
+}
+/* SongCard 自身带 transition:.25s（hover 边框/阴影），
+   这里显式合并 reveal 过渡，避免被覆盖导致突变 */
+.song.reveal{
+  transition:
+    opacity   var(--fx-dur) var(--fx-ease),
+    transform var(--fx-dur) var(--fx-ease),
+    filter    var(--fx-dur) var(--fx-ease),
+    border-color .25s ease,
+    box-shadow .25s ease;
+  transition-delay:var(--fx-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal,
+  [data-fx-section]{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+    transition:none !important;
+  }
+}
+
+/* ---------- 滚动条小细节（浏览器原生） ---------- */
+::selection{background:var(--green-bg);color:var(--green-2)}

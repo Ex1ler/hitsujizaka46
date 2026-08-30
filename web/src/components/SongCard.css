@@ -1,0 +1,182 @@
+/* 曲目卡片：竖向 hover 展开 */
+.song{
+  position:relative;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--white),rgba(245,247,240,.68));
+  border-radius:14px;
+  transition:.25s;
+  overflow:hidden;
+  box-shadow:var(--shadow-1);
+}
+.song::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:var(--green);transform:scaleY(0);transform-origin:top;
+  transition:transform .3s ease;
+}
+.song:hover,.song.is-open{border-color:var(--line-green);box-shadow:var(--shadow-2)}
+.song:hover::before,.song.is-open::before{transform:scaleY(1)}
+/* 展开态强制可见：即便 reveal 动画在极端回流下被重置，已展开的曲目卡片也绝不消失 */
+.song.is-open{
+  opacity:1 !important;
+  transform:none !important;
+  filter:none !important;
+  grid-column:1 / -1;
+}
+
+.song-head{
+  display:flex;align-items:center;gap:14px;
+  width:100%;
+  min-height:56px;
+  padding:16px 20px;
+  text-align:left;
+  cursor:pointer;
+}
+.song-head:focus-visible{
+  box-shadow:none;
+}
+.song-bar{
+  width:2px;height:30px;background:var(--green);flex-shrink:0;
+}
+.song-main{flex:1;min-width:0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.song-nm{
+  flex:1;min-width:0;
+  font-family:var(--font-serif);font-size:16px;color:var(--ink);
+  letter-spacing:.04em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.song-ct{
+  flex-shrink:0;
+  font-family:var(--font-serif);font-size:18px;font-weight:600;
+  color:var(--green-2);font-variant-numeric:tabular-nums;
+}
+.song-ct span{font-size:11px;color:var(--muted);font-weight:400;margin-left:2px}
+.song-chev{
+  flex-shrink:0;
+  margin-left:auto;
+  color:var(--muted);
+  font-family:var(--font-serif);font-size:18px;
+  transition:transform .3s ease;
+}
+.song.is-open .song-chev{transform:rotate(90deg);color:var(--green-2)}
+
+/* 搜索命中闪烁（SearchBar 跳转） */
+.song.is-flash{
+  animation:song-flash 2.4s ease;
+  border-color:var(--green);
+}
+@keyframes song-flash{
+  0%   {box-shadow:0 0 0 4px var(--green-bg)}
+  20%  {box-shadow:0 0 0 6px var(--green), 0 0 0 12px var(--green-bg-2)}
+  60%  {box-shadow:0 0 0 3px var(--green-bg-2)}
+  100% {box-shadow:var(--shadow-2)}
+}
+.song.is-flash .song-nm{color:var(--green-2)}
+
+.song-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
+.song.is-open .song-body{
+  max-height:156px; /* 约 3 行演出记录 + 暗示下一行 */
+}
+.song-body-inner{
+  border-top:1px solid var(--line);
+  background:var(--green-bg-2);
+  height:156px;
+  display:flex;flex-direction:column;
+}
+.perf-list{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.perf-list::-webkit-scrollbar{
+  width:5px;
+}
+.perf-list::-webkit-scrollbar-thumb{
+  background:var(--green);
+  border-radius:4px;
+}
+.perf-row{
+  flex-shrink:0;
+  display:grid;
+  grid-template-columns:34px 90px 1fr 70px;
+  align-items:center;gap:14px;
+  min-height:48px;
+  padding:11px 18px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+  transition:.15s;
+  position:relative;
+}
+.perf-row:last-child{border-bottom:0}
+.perf-row:hover{background:var(--white)}
+.perf-row:hover .perf-lk{color:var(--ink-2);border-color:var(--ink-2)}
+.perf-no{
+  font-family:var(--font-serif);font-size:12px;color:var(--green);
+  font-variant-numeric:tabular-nums;
+}
+.perf-dt{
+  color:var(--muted);font-variant-numeric:tabular-nums;
+  font-size:12px;letter-spacing:.04em;
+}
+.perf-ti{
+  color:var(--ink-2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-size:13px;letter-spacing:.02em;
+}
+.perf-lk{
+  /* 胶囊体（与制服与太阳 track-lk 一致） */
+  font-size:11px;color:var(--green-2);
+  text-align:center;
+  padding:5px 14px;
+  border:1px solid var(--line-green);
+  border-radius:999px;
+  background:var(--white);
+  letter-spacing:.08em;
+  font-weight:500;
+  transition:.22s;
+  white-space:nowrap;
+  justify-self:end;
+}
+.perf-row:focus-visible{
+  outline:none;
+  background:var(--white);
+  box-shadow:inset 0 0 0 1px var(--green);
+}
+.perf-row:hover .perf-lk{
+  color:var(--white);
+  background:var(--green);
+  border-color:var(--green);
+}
+
+@media(max-width:520px){
+  .song-head{
+    align-items:flex-start;
+    padding:14px 14px;
+  }
+  .song-main{
+    gap:8px;
+    align-items:flex-start;
+  }
+  .song-nm{
+    font-size:15px;
+    white-space:normal;
+    line-height:1.55;
+  }
+  .perf-row{
+    grid-template-columns:24px 74px 1fr;
+    gap:8px;
+    padding:11px 14px;
+  }
+  .perf-ti{
+    white-space:normal;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    line-clamp:2;
+  }
+  .perf-lk{grid-column:1/-1;text-align:left;justify-self:start}
+}

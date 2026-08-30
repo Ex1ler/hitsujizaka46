@@ -1,0 +1,103 @@
+/* =========================================================
+   滚动提示：稳定居中，无位移动画，仅透明度渐变
+   - is-down：向下滚动（点击翻页）
+   - is-top ：回到顶部（点击回顶）
+   ========================================================= */
+.scroll-hint{
+  position:fixed;
+  left:50%;bottom:20px;
+  transform:translateX(-50%);
+  display:flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:8px;
+  z-index:55;
+  pointer-events:none;
+  color:var(--green-2);
+  font-family:var(--font-serif);
+  opacity:0;
+  transition:opacity .35s ease;
+}
+.scroll-hint.is-visible{
+  opacity:1;
+  pointer-events:auto;
+}
+.scroll-hint.is-dimmed{
+  opacity:.45;
+}
+
+/* 文字胶囊 */
+.scroll-hint-text{
+  display:inline-flex;align-items:center;gap:6px;
+  min-height:40px;
+  padding:8px 18px;
+  background:var(--floating-bg);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  backdrop-filter:saturate(180%) blur(12px);
+  border:1px solid var(--floating-brd);
+  border-radius:999px;
+  font-size:11px;
+  letter-spacing:.22em;
+  color:var(--green-2);
+  box-shadow:var(--floating-shadow);
+  white-space:nowrap;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* 小箭头：只做极柔和的透明度呼吸，不再上下浮动 */
+.scroll-hint-arrow{
+  display:inline-flex;align-items:center;justify-content:center;
+  color:currentColor;
+  animation:scroll-hint-pulse 2.4s ease-in-out infinite;
+}
+
+/* down 模式 */
+.scroll-hint.is-down .scroll-hint-text:hover{
+  background:var(--green);
+  color:var(--white);
+  border-color:var(--green);
+}
+.scroll-hint.is-down:focus-visible{
+  outline:0;
+}
+.scroll-hint.is-down:focus-visible .scroll-hint-text{
+  border-color:var(--green);
+  box-shadow:0 0 0 2px var(--green-bg);
+}
+
+/* top 模式 */
+.scroll-hint.is-top .scroll-hint-arrow{
+  transform:rotate(180deg);
+}
+.scroll-hint.is-top .scroll-hint-text:hover{
+  background:var(--green);
+  color:var(--white);
+  border-color:var(--green);
+}
+.scroll-hint.is-top:focus-visible{
+  outline:0;
+}
+.scroll-hint.is-top:focus-visible .scroll-hint-text{
+  border-color:var(--green);
+  box-shadow:0 0 0 2px var(--green-bg);
+}
+
+@keyframes scroll-hint-pulse{
+  0%,100%{opacity:.7}
+  50%    {opacity:1}
+}
+
+@media (max-width:720px){
+  .scroll-hint{bottom:12px;gap:6px}
+  .scroll-hint-text{font-size:10px;padding:7px 14px;letter-spacing:.16em}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .scroll-hint{transition:none}
+  .scroll-hint-arrow{animation:none}
+}
+
+body.is-lightbox-open .scroll-hint{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}

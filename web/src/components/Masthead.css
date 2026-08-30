@@ -1,0 +1,140 @@
+/* =========================================================
+   主标题区：Logo + 咩咩坂46 + HITSUJIZAKA46 中轴线对齐
+   ========================================================= */
+.masthead{
+  position:relative;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+/* 装饰：极淡绿底放射大圆 */
+.masthead::before{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  width:760px;height:760px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--green-bg-2) 0%,rgba(240,247,235,0) 60%);
+  z-index:0;pointer-events:none;
+  opacity:.76;
+  transition:opacity .55s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready::before{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1.02);
+}
+.masthead-grid{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:100px 32px 80px;
+  position:relative;
+  z-index:2;
+}
+
+/* 关键：让 logo 和文字整体居中（中轴线和 FOLLOW 卡片中心对齐） */
+.masthead-brand{
+  display:flex;
+  align-items:center;justify-content:center;
+  gap:48px;
+}
+.masthead-brand .logo-wrap{
+  flex-shrink:0;
+  width:128px;height:128px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.92;
+  transform:translateY(6px) rotate(-2deg);
+  transition:opacity .55s ease, transform .75s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready .masthead-brand .logo-wrap{
+  opacity:1;
+  transform:none;
+}
+.masthead-brand .logo-img{
+  width:100%;height:100%;object-fit:contain;
+  display:block;
+}
+/* title + sub 列：内部用 justify-content 让 title 块与 logo 中心对齐 */
+.masthead-brand-text{
+  display:flex;flex-direction:column;gap:14px;
+  justify-content:center;
+  align-items:center;
+}
+.masthead-title{
+  margin:0;
+  display:flex;align-items:baseline;gap:18px;
+  font-family:var(--font-serif);
+  font-weight:700;
+  line-height:1;
+  color:var(--green);
+}
+.masthead-zh{
+  font-size:96px;
+  letter-spacing:.06em;
+  opacity:.96;
+  transform:translateY(8px);
+  transition:opacity .55s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready .masthead-zh{
+  opacity:1;
+  transform:none;
+}
+.masthead-num{
+  font-size:98px;
+  letter-spacing:-.02em;
+  font-weight:600;
+  color:var(--green-2);
+  opacity:.96;
+  transform:translateY(8px);
+  transition:opacity .6s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready .masthead-num{
+  opacity:1;
+  transform:none;
+}
+.masthead-sub{
+  margin:0;
+  font-family:var(--font-sans);
+  font-weight:500;
+  font-size:18px;
+  line-height:1;
+  letter-spacing:.42em;
+  color:var(--green);
+  text-transform:uppercase;
+  opacity:.92;
+  transform:translateY(6px);
+  transition:opacity .6s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.masthead.is-ready .masthead-sub{
+  opacity:1;
+  transform:none;
+}
+
+@media(max-width:980px){
+  .masthead-grid{padding:72px 28px 60px}
+  .masthead-brand{gap:24px}
+  .masthead-brand .logo-wrap{width:80px;height:80px}
+  .masthead-zh{font-size:56px}
+  .masthead-num{font-size:58px}
+  .masthead-sub{font-size:13px;letter-spacing:.32em}
+}
+@media(max-width:520px){
+  .masthead-grid{padding:56px 18px 48px}
+  .masthead-brand{gap:16px}
+  .masthead-brand .logo-wrap{width:58px;height:58px}
+  .masthead-zh{font-size:42px}
+  .masthead-num{font-size:44px}
+  .masthead-sub{font-size:11px;letter-spacing:.24em}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .masthead::before,
+  .masthead-brand .logo-wrap,
+  .masthead-zh,.masthead-num,.masthead-sub{
+    transition:none !important;
+    opacity:1 !important;
+    transform:none !important;
+  }
+}

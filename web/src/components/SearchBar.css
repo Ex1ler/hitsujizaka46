@@ -1,0 +1,198 @@
+/* =========================================================
+   Topbar 搜索栏（client 组件）
+   ========================================================= */
+.searchbar{
+  position:relative;
+  display:flex;align-items:center;
+  flex:0 1 auto;
+  min-width:0;
+  max-width:340px;
+  width:100%;
+}
+.searchbar-field{
+  display:flex;align-items:center;gap:8px;
+  width:100%;
+  min-height:42px;
+  padding:7px 12px;
+  background:var(--glass-strong);
+  border:1px solid var(--line);
+  border-radius:999px;
+  transition:.22s;
+  /* 常态低调，聚焦/有内容时加深 */
+}
+.searchbar.is-open .searchbar-field,
+.searchbar.has-q .searchbar-field,
+.searchbar:focus-within .searchbar-field{
+  background:var(--white);
+  border-color:var(--green);
+  box-shadow:0 2px 10px rgba(63,122,50,.08);
+}
+.searchbar-ic{
+  color:var(--muted);
+  flex-shrink:0;
+  transition:color .22s;
+}
+.searchbar:focus-within .searchbar-ic{color:var(--green-2)}
+
+.searchbar-input{
+  flex:1;min-width:0;
+  border:0;outline:0;background:transparent;
+  font:inherit;
+  font-size:13px;
+  letter-spacing:.04em;
+  color:var(--ink);
+  padding:0;
+}
+.searchbar-input::placeholder{
+  color:var(--muted-2);
+  letter-spacing:.08em;
+}
+
+.searchbar-clear{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;
+  border-radius:50%;
+  font-size:14px;line-height:1;
+  color:var(--muted);
+  background:transparent;
+  transition:.18s;
+}
+.searchbar-clear:hover{
+  color:var(--ink);
+  background:var(--green-bg);
+}
+
+/* ---------- 下拉建议 ---------- */
+.searchbar-pop{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;right:0;
+  background:rgba(252, 253, 249, .98);
+  border:1px solid var(--line-green);
+  border-radius:14px;
+  box-shadow:0 18px 40px rgba(31,40,24,.16);
+  overflow:hidden;
+  z-index:70;
+  isolation:isolate;
+  animation:searchbar-pop-in .18s ease forwards;
+  transform-origin:top center;
+}
+@keyframes searchbar-pop-in{
+  from{opacity:0;transform:translateY(-4px) scale(.98)}
+  to  {opacity:1;transform:translateY(0) scale(1)}
+}
+
+.searchbar-list{
+  list-style:none;margin:0;padding:6px;
+  max-height:380px;
+  overflow:auto;
+  background:transparent;
+}
+.searchbar-item{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+  min-height:42px;
+  padding:10px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:.15s;
+}
+.searchbar-item.is-hi{
+  background:var(--green-bg-2);
+}
+.searchbar-item:not(.is-hi):hover{
+  background:var(--paper-2);
+}
+.searchbar-item-name{
+  font-family:var(--font-serif);font-size:14px;
+  color:var(--ink);
+  letter-spacing:.04em;
+  flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.searchbar-mark{
+  background:var(--green);
+  color:var(--white);
+  border-radius:2px;
+  padding:0 3px;
+  margin:0 -1px;
+}
+.searchbar-item-tag{
+  flex-shrink:0;
+  display:inline-flex;align-items:center;
+  padding:3px 10px;
+  border-radius:999px;
+  font-size:10px;letter-spacing:.18em;
+  border:1px solid var(--line-green);
+  background:var(--white);
+  color:var(--green-2);
+}
+.searchbar-item-tag.is-setlist{
+  background:var(--green);color:var(--white);border-color:var(--green);
+}
+.searchbar-item-tag.is-stage{
+  background:var(--white);color:var(--green-2);border-color:var(--green);
+}
+.searchbar-item-tag.is-special{
+  background:var(--green-bg);color:var(--green-2);border-color:var(--green);
+}
+
+/* 空结果 */
+.searchbar-empty{
+  padding:24px 18px 20px;
+  text-align:center;
+  color:var(--muted);
+}
+.searchbar-empty-zh{
+  display:block;
+  font-family:var(--font-serif);font-size:14px;
+  color:var(--ink);letter-spacing:.06em;
+  margin-bottom:6px;
+}
+.searchbar-empty small{
+  display:block;
+  font-size:11px;letter-spacing:.04em;
+  color:var(--muted-2);
+}
+
+/* 底部快捷键提示 */
+.searchbar-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+  padding:8px 14px;
+  border-top:1px solid var(--line);
+  background:rgba(246,248,241,.98);
+  font-size:10px;letter-spacing:.08em;
+  color:var(--muted);
+}
+.searchbar-foot span{display:inline-flex;align-items:center;gap:4px}
+.searchbar-foot kbd{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:18px;height:18px;padding:0 4px;
+  background:var(--white);
+  border:1px solid var(--line-green);
+  border-radius:3px;
+  font:inherit;font-size:9px;
+  color:var(--ink-2);
+}
+
+/* 响应式：移动端隐藏（搜索可以走 dotnav / 详情页） */
+@media (max-width:1020px){
+  .topbar .searchbar{display:none}
+}
+
+/* =========================================================
+   搜索命中闪烁（毕业公演页面高亮曲目）
+   ========================================================= */
+.track-item.is-flash{
+  animation:track-flash 2.4s ease;
+  background:var(--green-bg);
+  box-shadow:inset 3px 0 0 var(--green);
+}
+@keyframes track-flash{
+  0%  {background:var(--green-bg-2);box-shadow:inset 4px 0 0 var(--green)}
+  20%  {background:var(--green);color:var(--white);box-shadow:inset 6px 0 0 var(--green-2)}
+  35%  {background:var(--green-bg);color:inherit;box-shadow:inset 3px 0 0 var(--green)}
+  100%{background:transparent;box-shadow:inset 0 0 0 transparent}
+}
+.track-item.is-flash .track-nm{color:var(--green-2)}

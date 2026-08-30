@@ -1,0 +1,74 @@
+/* 公演曲目详情页 */
+.stage-page{
+  min-height:100vh;
+  padding:56px 0 88px;
+}
+.stage-page-inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 32px;
+}
+.stage-back{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--tap-min);
+  gap:6px;
+  padding:8px 18px;
+  font-size:13px;letter-spacing:.08em;
+  color:var(--green);
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:999px;
+  margin-bottom:24px;
+  transition:.22s ease;
+}
+.stage-back:focus-visible{
+  border-color:var(--green);
+}
+.stage-back:hover{
+  color:var(--white);
+  background:var(--green);
+  border-color:var(--green);
+  transform:translateX(-2px);
+}
+.stage-page-head{
+  padding:4px 0 24px;
+  margin-bottom:28px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+.stage-page-head::after{
+  content:'';position:absolute;left:0;bottom:-1px;
+  width:80px;height:1px;background:var(--green);
+}
+.stage-page-name{
+  margin:0;
+  font-family:var(--font-serif);font-weight:600;
+  font-size:clamp(30px, 4.2vw, 42px);
+  letter-spacing:.04em;color:var(--ink);line-height:1.1;
+}
+.stage-page-songs{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(440px,1fr));
+  gap:18px;
+}
+
+@media(max-width:780px){
+  .stage-page-inner{padding:0 18px}
+  .stage-page-songs{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    grid-auto-flow:row dense;
+  }
+}
+
+@media(max-width:520px){
+  .stage-page{padding:40px 0 72px}
+  .stage-back{margin-bottom:18px}
+  .stage-page-head{margin-bottom:22px}
+  .stage-page-inner{padding:0 14px}
+  .stage-page-songs{
+    grid-template-columns:minmax(0,1fr);
+    gap:12px;
+  }
+}

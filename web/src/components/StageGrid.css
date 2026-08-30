@@ -1,0 +1,51 @@
+/* 公演卡片 2x2 网格 */
+.stage-section{
+  width:100%;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 32px;
+  position:relative;
+}
+.stage-section-head{
+  display:block;
+  padding:24px 0 56px;
+  margin-bottom:64px;
+  position:relative;
+}
+.stage-section-text{padding-bottom:6px}
+.stage-section-en{
+  display:block;
+  font-size:11px;letter-spacing:.4em;
+  color:var(--green);text-transform:uppercase;
+  margin-bottom:16px;font-weight:600;
+}
+.stage-section-zh{
+  margin:0;
+  font-family:var(--font-serif);font-weight:600;
+  font-size:42px;letter-spacing:.02em;color:var(--ink);line-height:1.1;
+}
+.stage-section-sub{
+  margin:14px 0 0;
+  font-size:16px;letter-spacing:.04em;
+  color:var(--muted);line-height:1.6;
+}
+.stage-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+  transform:translateY(-50px);
+}
+
+@media(max-width:780px){
+  .stage-section{padding:72px 18px 0}
+  .stage-section-zh{font-size:30px}
+  .stage-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+}
+
+@media(max-width:520px){
+  .stage-section{padding:64px 14px 0}
+  .stage-grid{
+    grid-template-columns:minmax(0,1fr);
+    gap:12px;
+  }
+}

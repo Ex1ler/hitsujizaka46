@@ -1,0 +1,13 @@
+/* 樱花飘落 canvas（全局装饰，穿透点击） */
+.sakura-canvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:40;          /* 内容上方，但低于顶栏(60)/滚动提示(55)/回顶(70) */
+  pointer-events:none;
+  will-change:transform;
+}
+@media (prefers-reduced-motion: reduce){
+  .sakura-canvas{display:none}
+}
