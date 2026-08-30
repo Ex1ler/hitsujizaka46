@@ -36,7 +36,6 @@
 ```text
 hitsujizaka46/
 ├── README.md
-├── HANDOVER.md
 ├── UX_REVIEW_AND_ROADMAP_2026-08-29.md
 └── web/
     ├── package.json
@@ -53,7 +52,6 @@ hitsujizaka46/
 - `web/src/app/` 放路由与页面入口
 - `web/src/components/` 放首页与详情页的主要组件
 - `web/src/data/site.json` 是当前前端消费的核心数据文件
-- `HANDOVER.md` 是最完整的项目交接文档
 - `UX_REVIEW_AND_ROADMAP_2026-08-29.md` 记录一版系统性的 UX/UI 评审与路线图
 
 ## 本地开发
