@@ -378,7 +378,11 @@ summary:focus-visible{
 }
 
 @media(max-width:520px){
-  .foot-bless-tx{font-size:23px}
+  .foot-bless-tx{
+    font-size:16px;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
   .foot-name{
     font-size:18px;
     letter-spacing:.08em;
