@@ -76,6 +76,12 @@ export default function HomePage() {
                   <p>站内所涉图片、音乐、视频、人物形象及相关素材，其著作权、商标权与其他权利均归原权利方或所属平台所有。</p>
                   <p>页面内容在合理整理与引用范围内展示；如权利方认为相关内容不宜继续呈现，请联系处理，本站将在核实后及时调整或删除。</p>
                 </div>
+                <p className="foot-note-thanks">
+                  特别致谢：
+                  <a href="https://space.bilibili.com/2684628" target="_blank" rel="noreferrer">
+                    @只想做小羊小姐的
+                  </a>
+                </p>
               </div>
             </details>
           </div>
