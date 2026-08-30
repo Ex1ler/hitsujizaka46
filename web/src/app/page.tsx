@@ -50,7 +50,11 @@ export default function HomePage() {
 
           <div className="foot-brand reveal" style={{ ['--fx-delay' as any]: '160ms' }}>
             <img src="/logo.png" alt="" className="foot-mark" draggable={false} />
-            <span className="foot-name">咩咩坂46</span>
+            <span className="foot-name">
+              <span className="foot-name-main">咩咩坂</span>
+              <wbr />
+              <span className="foot-name-suffix">46</span>
+            </span>
             <span className="foot-en">HITSUJIZAKA46</span>
           </div>
           <nav className="foot-links reveal" style={{ ['--fx-delay' as any]: '320ms' }}>

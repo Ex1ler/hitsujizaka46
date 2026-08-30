@@ -217,8 +217,11 @@ summary:focus-visible{
   font-family:var(--font-serif);font-weight:600;
   font-size:30px;letter-spacing:.12em;color:var(--ink);
   line-height:1;
-  display:inline-flex;align-items:baseline;
+  display:inline-flex;align-items:baseline;flex-wrap:wrap;
+  justify-content:center;
 }
+.foot-name-main{white-space:nowrap}
+.foot-name-suffix{white-space:nowrap}
 .foot-en{
   font-size:16px;letter-spacing:.46em;color:var(--green);
   text-transform:uppercase;
@@ -376,7 +379,12 @@ summary:focus-visible{
 
 @media(max-width:520px){
   .foot-bless-tx{font-size:23px}
-  .foot-name{font-size:23px}
+  .foot-name{
+    font-size:18px;
+    letter-spacing:.08em;
+    max-width:3.8em;
+    row-gap:2px;
+  }
   .foot-fine{margin-top:28px}
   .foot-note{border-radius:20px}
   .foot-note-summary{padding:18px 18px}
