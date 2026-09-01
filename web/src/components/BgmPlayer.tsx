@@ -178,7 +178,7 @@ export default function BgmPlayer() {
   if (collapsed) {
     return (
       <div className="bgm is-collapsed" aria-label="背景音乐播放器" ref={containerRef}>
-        <audio ref={audioRef} loop preload="metadata">
+        <audio ref={audioRef} loop preload="auto">
           <source src="/bgm.m4a" type="audio/mp4" />
           <source src="/bgm.mp3" type="audio/mpeg" />
         </audio>
@@ -197,7 +197,7 @@ export default function BgmPlayer() {
 
   return (
     <div className="bgm" aria-label="背景音乐播放器" ref={containerRef}>
-      <audio ref={audioRef} loop preload="metadata">
+      <audio ref={audioRef} loop preload="auto">
         <source src="/bgm.m4a" type="audio/mp4" />
         <source src="/bgm.mp3" type="audio/mpeg" />
       </audio>
