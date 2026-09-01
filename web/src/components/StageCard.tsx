@@ -9,10 +9,10 @@ interface Props {
 }
 
 const COVER_SRC: Record<string, string> = {
-  '绯闻偶像': '/stage-covers/gossip-idol.jpg',
-  '遇见你后，夏天开始了': '/stage-covers/summer.jpg',
-  '缩略图': '/stage-covers/thumbnail.jpg',
-  '恋爱禁止条例': '/stage-covers/forbidden.png',
+  '绯闻偶像': '/stage-covers/gossip-idol.webp',
+  '遇见你后，夏天开始了': '/stage-covers/summer.webp',
+  '缩略图': '/stage-covers/thumbnail.webp',
+  '恋爱禁止条例': '/stage-covers/forbidden.webp',
 };
 
 export default function StageCard({ region, index, revealDelay = 0 }: Props) {

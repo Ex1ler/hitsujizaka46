@@ -19,9 +19,9 @@ interface Group {
 }
 
 const ORIGIN_ART: Partial<Record<SpecialOrigin, string>> = {
-  Solo: '/special-covers/solo.jpg',
+  Solo: '/special-covers/solo.webp',
   AKB48: '/special-covers/akb48.svg',
-  Sakamichi: '/special-covers/sakamichi.png',
+  Sakamichi: '/special-covers/sakamichi.webp',
   Other: '/special-covers/others.webp',
 };
 

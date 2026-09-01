@@ -89,7 +89,7 @@ export default function Topbar() {
       <div className="topbar-inner">
         <div className="topbar-start">
           <a className="brand" href="/">
-            <img src="/logo.png" alt="" className="brand-mark" draggable={false} />
+            <img src="/logo.webp" alt="" className="brand-mark" draggable={false} />
             <span className="brand-zh">咩咩坂46</span>
           </a>
           <VisitCounter />

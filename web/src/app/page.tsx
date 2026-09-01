@@ -49,7 +49,7 @@ export default function HomePage() {
           </p>
 
           <div className="foot-brand reveal" style={{ ['--fx-delay' as any]: '160ms' }}>
-            <img src="/logo.png" alt="" className="foot-mark" draggable={false} />
+            <img src="/logo.webp" alt="" className="foot-mark" draggable={false} />
             <span className="foot-name">
               <span className="foot-name-main">咩咩坂</span>
               <wbr />

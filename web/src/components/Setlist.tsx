@@ -28,7 +28,7 @@ export default function Setlist() {
     >
       <div className="lightbox-center" onClick={e => e.stopPropagation()}>
         <img
-          src="/graduation-stage.jpg"
+          src="/graduation-stage.webp"
           alt="王晓阳毕业公演 · 制服与太阳 20260816"
           className="lightbox-img"
         />
@@ -93,7 +93,7 @@ export default function Setlist() {
           aria-label="点击查看大图"
         >
           <img
-            src="/graduation-stage.jpg"
+            src="/graduation-stage.webp"
             alt="王晓阳毕业公演 · 制服与太阳 20260816"
             className="setlist-hero-img"
             loading="lazy"
